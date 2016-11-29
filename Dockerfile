@@ -1,8 +1,6 @@
 FROM nimbix/base-ubuntu-nvidia:8.0-cudnn5-devel
 MAINTAINER Nimbix, Inc. <support@nimbix.net>
 
-ENV MPI_VERSION 2.0.1
-
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
@@ -21,5 +19,10 @@ RUN apt-get update && apt-get install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ADD ./install.sh /tmp/install.sh
-RUN /bin/bash /tmp/install.sh && rm -rf /tmp/install.sh
+ENV MPI_VERSION 2.0.1
+ADD ./install-openmpi.sh /tmp/install-openmpi.sh
+RUN /bin/bash -x /tmp/install-openmpi.sh && rm -rf /tmp/install-openmpi.sh
+
+ENV OSU_VERSION 5.3.2
+ADD ./install-osu.sh /tmp/install-osu.sh
+RUN /bin/bash -x /tmp/install-osu.sh && rm -rf /tmp/install-osu.sh
