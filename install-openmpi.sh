@@ -4,7 +4,7 @@ cd /tmp && curl https://www.open-mpi.org/software/ompi/v2.0/downloads/openmpi-${
 
 cd /tmp/openmpi-${MPI_VERSION} && \
     ./configure --with-cuda=/usr/local/cuda --enable-mpi-thread-multiple \
-        --with-wrapper-ldflags=-Wl,-rpath,/lib --enable-picky \
+        --with-wrapper-ldflags=-Wl,-rpath,/lib --enable-picky --enable-mpi-cxx \
         --enable-orterun-prefix-by-default -disable-io-romio --prefix=/usr && \
     make -j2 && \
     make install
